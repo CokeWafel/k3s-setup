@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ticket-service-rest-deployment
+  labels:
+    app: ticket-service-rest
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ticket-service-rest
+  template:
+    metadata:
+      labels:
+        app: ticket-service-rest
+    spec:
+      containers:
+        - name: ticket-service-rest
+          image: registry.gitlab.com/hasseltse-wafel/ticket-service/rest:latest
+          ports:
+            - containerPort: 80
