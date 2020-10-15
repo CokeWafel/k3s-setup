@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: postgres-database-statefulset
+  name: postgres-database
 spec:
   selector:
     matchLabels:
@@ -23,9 +23,9 @@ spec:
             - name: POSTGRES_DB
               value: wafel
             - name: POSTGRES_USER
-              value: wafel
+              value: wafel_k8s
             - name: POSTGRES_PASSWORD
-              value: wafel
+              value: wafel_k8s
             - name: PGDATA
               value: /var/lib/postgresql/data/pgdata
   volumeClaimTemplates:

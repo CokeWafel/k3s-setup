@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: watchable-service-rest-deployment
+  labels:
+    app: watchable-service-rest
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: watchable-service-rest
+  template:
+    metadata:
+      labels:
+        app: watchable-service-rest
+    spec:
+      containers:
+        - name: watchable-service-rest
+          image: registry.gitlab.com/hasseltse-wafel/watchable-service/rest:latest
+          ports:
+            - containerPort: 80
