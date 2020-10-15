@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: event-service-rest-deployment
+  labels:
+    app: event-service-rest
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: event-service-rest
+  template:
+    metadata:
+      labels:
+        app: event-service-rest
+    spec:
+      containers:
+      - name: event-service-rest
+        env:
+          - name: JAVA_OPTIONS
+            value: "-Dspring.profiles.active=${ENVIRONMENT}"
+          - name: ENVIRONMENT
+            valueFrom:
+              configMapKeyRef:
+                name: global-configmap
+                key: ENVIRONMENT
+        image: registry.gitlab.com/hasseltse-wafel/event-service:latest
+        imagePullPolicy: IfNotPresent
+        resources:
+          requests:
+            memory: 1024Mi
+            cpu: 10m
+          limits:
+            memory: 2048Mi
+            cpu: 20m
+        ports:
+        - containerPort: 80
+        livenessProbe:
+          httpGet: 
+            path: /
+            port: 8080
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+        readinessProbe:
+          httpGet: 
+            path: /
+            port: 8080
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
