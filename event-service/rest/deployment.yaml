@@ -32,20 +32,20 @@ spec:
             memory: 2048Mi
             cpu: 20m
         ports:
-        - containerPort: 80
-        livenessProbe:
-          httpGet: 
-            path: /event-service/health-check/ping
-            port: 8080
-          initialDelaySeconds: 30
-          periodSeconds: 10
-          successThreshold: 1
-          timeoutSeconds: 1
-        readinessProbe:
-          httpGet: 
-            path: /event-service/health-check/ping
-            port: 8080
-          initialDelaySeconds: 30
-          periodSeconds: 10
-          successThreshold: 1
-          timeoutSeconds: 1
+        - containerPort: 8080
+        # livenessProbe:
+        #   httpGet: 
+        #     path: /health-check/ping
+        #     port: 8080
+        #   initialDelaySeconds: 30
+        #   periodSeconds: 10
+        #   successThreshold: 1
+        #   timeoutSeconds: 1
+        # readinessProbe:
+        #   httpGet: 
+        #     path: /health-check/ping
+        #     port: 8080
+        #   initialDelaySeconds: 30
+        #   periodSeconds: 10
+        #   successThreshold: 1
+        #   timeoutSeconds: 1
